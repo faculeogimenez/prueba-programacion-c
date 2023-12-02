@@ -546,18 +546,21 @@ int carga_maxima=100;
 
 //prototipo de funcion
 
-void carga_vector (char vector_categoria_cliente[], int vector_importe_compra []);
+void carga_vector (char vector_categoria_cliente[], int vector_importe_compra [], int *cantidad_clientes_registrados, int *cantidad_no_inscriptos, int *cantidad_inscriptos);
 void mostrar_vector (char vector_categoria_cliente [], int vector_importe_compra[]);
-
+void porcentaje_categoria (char vector_categoria_cliente[], int *cantidad_clientes_registrados, float *porcentaje_inscriptos, float *porcentaje_no_inscriptos, int *cantidad_inscriptos, int *cantidad_no_inscriptos, int *cantidad_no_inscritos, int *cantidad_inscriptos);
+void categoria_mas_compro (int *cantidad_inscriptos, int *cantidad_no_inscriptos)
 //funcion princpal 
 
 int main (){ 
 char vector_categoria_cliente [2];
 int vector_importe_compra [100];
+int cantidad_clientes_registrados;
 
-carga_vector (vector_categoria_cliente, vector_importe_compra);
+carga_vector (vector_categoria_cliente, vector_importe_compra *cantidad_clientes_registrados, *cantidad_no_inscriptos, *cantidad_inscriptos);
 mostrar_vector (vector_categoria_cliente, vector_importe_compra);
-
+porcentaje_categoria (vector_categoria_cliente, *cantidad_clientes_registrados, *porcentaje_inscriptos, *porcentaje_no_inscriptos,*cantidad_inscriptos,*cantidad_no_inscriptos, *cantidad_no_inscritos, *cantidad_inscriptos);
+categoria_mas_compro ( *cantidad_inscriptos, *cantidad_no_inscriptos)
 
 
 return 0;}
@@ -566,14 +569,191 @@ return 0;}
 
 //desarrollo de funciones
 
-void cargar_vector (char vector_categoria_cliente [], int vector_importe_compra): {
+void cargar_vector (char vector_categoria_cliente [], int vector_importe_compra, int *cantidad_clientes_registrados, int *cantidad_no_inscriptos, int *cantidad_inscriptos): {
  int i;
        for (i=0;i<carga_maxima;i++){
         printf ("ingrese la categoria del cliente siendo i para inscripto y n para no inscripto");
         scanf ("%c",&vector_categoria_cliente [i]);
+        printf ("ingrese el montode la compra ");
+        scanf ("%d",&vector_importe_compra[i]);
+        *cantidad_clientes_registrados++;
+            if (vector_categoria_cliente[i]==inscripto){
+                *cantidad_inscriptos++;
+            }
+            if (vector_categoria_cliente[i]==no inscripto){
+                *cantidad_no_inscripto++;
+            }
 }
 
 }
 
+//2. Mostrar los dos vectores.
 
+void mostrar_vector (char vector_categoria_cliente[], int vector_importe_compra[]); {
+
+    int i;
+    for (i=0; i<carga_maxima;i++){
+        printf ("%c",vector_categoria_cliente[i]);
+        printf ("%d", vector_importe_compra[i]);
+    }
+}
+
+//3. Función que retorne porcentaje de clientes según categoría
+
+void porcentaje_categoria (char vector_categoria_cliente[], int *cantidad_clientes_registrados, float *porcentaje_inscriptos, float *porcentaje_no_inscriptos, int *cantidad_inscriptos, int *cantidad_no_inscriptos, int *cantidad_no_inscritos, int *cantidad_inscriptos); {
+    
+    *porcentaje_inscriptos=*cantidad_inscrptos*100/ *cantidad_clientes_registrados;
+    *porcentaje_no_inscriptos=*cantidad_no_inscriptos*100/ *cantidad_clientes_registrados;
+    printf ("el porcentaje de clientes no inscriptos es de % /n %f",*porcentaje_no_inscriptos);
+    printf ("el porcentaje de clientes inscriptos es de % /n %f", *porcentaje_inscriptos);
+
+    
+}
+
+//4. Función que retorne cual categoría de clientes realizo la mayor cantidad de compras.
+
+void categoria_mas_compro (int *cantidad_inscriptos, int *cantidad_no_inscriptos){
+    if (*cantidad_no_inscriptos > *cantidad_inscriptos){
+        printf ("la categoria que mayor cantidad de operacion realizo por NO INSCRIPTO  /n");
+
+    }
+    else {
+        printf ("la categoria que mas compras realizo en INSCRIPTO");
+    }
+}
+
+/*5. Función que muestre un listado de compras realizadas por clientes de categoría Inscriptos
+indicando para cada una el numero de cliente y el importe de compra. Mostrar además cual
+fue el importe promedio de compras realizadas y cuantas compras superan el mismo.
+*/
+
+void compras_inscriptos () {
+    
+}
+
+//Ejercicio 2
+
+/*
+En una empresa familiar se quiere otorgar a los empleados que no hayan tenido inasistencias
+durante el mes de Octubre un bono especial.
+
+Los datos se almacenaran en dos vectores.
+ En el vector_1 se almacenara el sueldo de cada empleado
+ En el vector_2 se almacenara la asistencias 
+(N=sin inasistencias; S=tuvo inasistencias).
+
+La empresa cuenta con un total de 75 empleados.
+
+Desarrollar un programa en C que implemente funciones para:
+
+1.Cargar los dos vectores.
+2. Mostrar los dos vectores.
+3. Función que retorne cantidad de empleados que no percibirán el bono.
+4. Función que muestre un listado con el número de empleado e importe correspondiente al
+bono que percibirá. El bono se calcula en base al sueldo:
+Sueldo menor o igual a $500.000  se abonara un bono del 15%
+Sueldo mayor a $500.000  se abonara un bono del 10%
+
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int carga_maxima =76;
+
+//prototipo de funciones
+void carga_vectores (char vector_asistencias[], int vector_sueldo[], int vector_empleado_bono[]);
+void mostrar_vector (char vector_asistencias[], int vector_sueldo[]);
+void empleados_sin_bono (char vector_asistencias[], int empleados_ausentes);
+void  empleados_bono(int vector_sueldo[],char vector_asistencias[],int vector_empleado_bono[] int *empleados_presentes, int *sueldo_mayor, int *sueldo_menor);
+
+//funcion principal 
+
+int main () {
+
+char vector_asistencias[75];
+int vector_sueldo [75];
+int vector_empleado_bono [75];
+
+//invocacion de funcion
+
+carga_vectores (vector_asistencias,vector_sueldo, vector_empleado_bono);
+mostrar_vector (vector_asistencias,vector_sueldo);
+empleados_sin_bono(vector_asistencias, empleados_ausentes);
+empleados_bono( vector_sueldo[],vector_asistencias[],vector_empleado_bono, *empleados_presentes,*sueldo_mayor,*sueldo_menor);
+
+    return 0;
+}
+
+
+//desarollo de funciones 
+
+
+//1.Cargar los dos vectores.
+
+void carga_vectores (char vector_asistencias[], int vector_sueldo[], int vector_empleado_bono);
+{
+    int i;
+
+    for (i=0;i<carga_maxima;i++){
+void  empleados_bono(int vector_sueldo[],char vector_asistencias[], int *empleados_presentes, int *sueldo_mayor, int *sueldo_menor);
+        printf ("ingrese si el empleado a tenido inasistencias siendo s para si y n para no");
+        scanf ("%c", &vector_asistencias[i]);
+        printf ("ingrese el sueldo del emepleado");
+        scanf ("%d",&vector_sueldo[i]);
+        if (vector_asistencias[i]==n){
+            scanf("%d",&vector_empleado_bono[i]);
+        }
+    }
+}
+
+//2. Mostrar los dos vectores.
+
+void mostrar_vector (char vector_asistencias[], int vector_sueldo[],int *empleados_presentes);{
+    int i;
+
+    for (i=0;i<carga_maxima;i++){
+        printf ("asistencia de los empleados ");
+        printf ("%c", vector_asistencias[i]);
+        printf ("sueldo de los empleados ");
+        printf ("%d",vector_sueldo[i]);
+          if (vector_asistencias[i]==n){
+            *empleado_presentes++;
+          }
+        }
+}
+
+//3. Función que retorne cantidad de empleados que no percibirán el bono.
+
+void empleados_sin_bono (char vector_asistencia[], int empleados_ausentes);{
+    if (vector_asistencia[i]==s){
+        empleados_ausentes++;
+        
+    }
+    printf ("los empleados que no percibiran el bono debido a poseer inasistencias seran /n %d",empleados_ausentes);
+}void empleados_sin_bono (char vector_asistencia[], int empleados_ausentes);
+
+/*Función que muestre un listado con el número de empleado el
+ importe correspondiente al bono que percibirá. 
+El bono se calcula en base al sueldo:
+Sueldo menor o igual a $500.000  se abonara un bono del 15%
+Sueldo mayor a $500.000  se abonara un bono del 10% .*/
+
+void  empleados_bono(int vector_sueldo[],char vector_asistencias[],int vector_empleado_bono[] int *empleados_presentes, int *sueldo_mayor, int *sueldo_menor);{
+    int i;
+    if (vector_asistenias[i]==n) {
+        for (i=0;i<carga_maxima;i++){
+            printf("empleado");
+            printf ("%d",vector_empleado_bono[i] );
+            if (vector_sueldo[i]<==500000){
+                *sueldo_menor=vector_sueldo[i]*1.15;
+                printf("el sueldo a cobrar con un bono del 15% es de /n $ %d",*sueldo_menor);
+            }
+            if (vector_sueldo[i]>500000){
+                *sueldo_mayor=vector_sueldo[i]*1.10;
+                printf("el sueldo a cobrar con un bono del 10% es de /n $ %d",*suedldo_mayor);
+            }
+        }
+    }
+}
 

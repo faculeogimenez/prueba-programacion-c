@@ -671,7 +671,7 @@ void  empleados_bono(int vector_sueldo[],char vector_asistencias[],int vector_em
 
 int main () {
 
-char vector_asistencias[75];
+char vector_asistencias[2];
 int vector_sueldo [75];
 int vector_empleado_bono [75];
 
@@ -684,6 +684,7 @@ empleados_bono( vector_sueldo[],vector_asistencias[],vector_empleado_bono, *empl
 
     return 0;
 }
+
 
 
 //desarollo de funciones 
